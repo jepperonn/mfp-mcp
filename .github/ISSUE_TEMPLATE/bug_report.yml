@@ -1,0 +1,47 @@
+name: Bug report
+description: Something doesn't work
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > [!CAUTION]
+        > **Never paste MyFitnessPal cookies, your passcode, tokens or `SECRET_KEY` here.** This issue is public.
+        > Replace secrets with `<redacted>`, and leave out your server URL. Security problems: use the Security tab, not an issue.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead? Exact error messages help.
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where did it go wrong?
+      options:
+        - setup.sh / Fly.io deploy
+        - /setup page (MyFitnessPal cookies)
+        - Adding the connector in Claude
+        - Using the tools in a chat
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log lines (optional)
+      description: From `fly logs`. Check them for secrets before pasting.
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: Version / commit
+      description: Output of `git log -1 --format=%h` in your mfp-mcp folder
+  - type: checkboxes
+    id: secrets
+    attributes:
+      label: Before submitting
+      options:
+        - label: I checked that this issue contains no cookies, passcodes, tokens or other secrets.
+          required: true

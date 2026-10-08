@@ -1,0 +1,37 @@
+# Secrets and personal data: never commit these
+.env
+.env.*
+*.env
+cookie*.txt
+cookie*.json
+cookies*
+*.cookie
+*.pem
+*.key
+fly.toml
+data/
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Editors / OS / tools
+.claude/
+.idea/
+.vscode/
+.DS_Store

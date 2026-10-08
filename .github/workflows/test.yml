@@ -1,0 +1,54 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - run: ruff check .
+      - run: ruff format --check .
+      - run: mypy src
+      - run: pytest -q
+
+  lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+      - name: requirements.lock matches uv.lock
+        run: |
+          uv lock --check
+          uv export --frozen --no-dev --no-emit-project --no-header -o /tmp/req.lock -q
+          diff -u requirements.lock /tmp/req.lock
+
+  shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: shellcheck setup.sh docker-entrypoint.sh
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: docker build -t mfp-mcp .
+      - name: container starts and /mcp requires OAuth
+        run: |
+          docker run -d --name mfp -p 8000:8000 -e PUBLIC_URL=http://localhost:8000 -e MCP_PASSCODE=ci -e SECRET_KEY=ci mfp-mcp
+          for i in $(seq 1 30); do curl -fsS http://localhost:8000/health && break; sleep 1; done
+          code=$(curl -s -o /dev/null -w '%{http_code}' -X POST http://localhost:8000/mcp -H 'Content-Type: application/json' -d '{}')
+          test "$code" = 401
+          curl -s -D - -o /dev/null -X POST http://localhost:8000/mcp -H 'Content-Type: application/json' -d '{}' | grep -i '^www-authenticate: Bearer'
+      - if: failure()
+        run: docker logs mfp

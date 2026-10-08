@@ -1,0 +1,25 @@
+# Only requirements.lock, LICENSE, src/ and docker-entrypoint.sh are needed in the image.
+.git
+.github
+.claude
+.venv
+venv
+env
+tests
+docs
+data
+.env
+.env.*
+*.env
+*.db*
+*.sqlite*
+fly.toml
+cookie*
+*.cookie
+*.pem
+*.key
+__pycache__
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.DS_Store
