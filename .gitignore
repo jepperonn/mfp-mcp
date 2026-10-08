@@ -1,0 +1,11 @@
+.venv/
+data/
+*.db
+*.db-*
+fly.toml
+cookie*.txt
+cookies.json
+.claude/settings.local.json
+__pycache__/
+*.egg-info/
+.pytest_cache/

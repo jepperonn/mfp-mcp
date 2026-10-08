@@ -1,0 +1,10 @@
+.venv
+.git
+.github
+tests
+data
+*.db*
+fly.toml
+cookie*.txt
+cookies.json
+__pycache__
