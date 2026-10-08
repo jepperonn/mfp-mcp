@@ -16,11 +16,6 @@ Tell Claude what you ate in plain language, on your phone or computer, and it lo
 >
 > **Claude:** Logged ✅ Today: 1,240 / 2,300 kcal, 1,060 kcal and 74 g protein left.
 
-<!-- SCREENSHOT: add a phone screenshot or short GIF of a conversation like the one above here, e.g.
-     save it as docs/images/demo.png and replace this comment with:
-     <p align="center"><img src="docs/images/demo.png" alt="Logging breakfast with Claude on an iPhone" width="320"></p>
-     Crop out your name, account and anything else personal. -->
-
 > [!IMPORTANT]
 > **Unofficial.** This project is not affiliated with, endorsed by or supported by MyFitnessPal or Anthropic. MyFitnessPal has no public API for this. The server uses the same undocumented interface as the MyFitnessPal website, logged in as you. It can stop working whenever MyFitnessPal changes their site, and using it may go against [MyFitnessPal's terms](https://www.myfitnesspal.com/terms-of-service). Use it only with your own account, never share your server with anyone, and you are responsible for how you use it.
 
